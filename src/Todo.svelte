@@ -1,12 +1,5 @@
 <script>
   import TodoItem from "./TodoItem.svelte";
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
-  function updateActiveFolderTodoList() {
-    dispatch("updateActiveFolderTodoList", {
-        todoList
-    });
-  }
   let newTodoText = "";
   let currentFilter = "all";
   let nextId = 4;
@@ -25,7 +18,6 @@
       ];
       nextId = nextId + 1;
       newTodoText = "";
-      updateActiveFolderTodoList();
     }
   }
   $: todoListRemaining = filteredtodoList.filter(
@@ -40,18 +32,15 @@
   function checkAlltodoList(event) {
     todoList.forEach((todo) => (todo.completed = event.target.checked));
     todoList = todoList;
-    updateActiveFolderTodoList();
   }
   function updateFilter(newFilter) {
     currentFilter = newFilter;
   }
   function clearCompleted() {
     todoList = todoList.filter((todo) => !todo.completed);
-    updateActiveFolderTodoList();
   }
   function handleDeleteTodo(event) {
     todoList = todoList.filter((todo) => todo.id !== event.detail.id);
-    updateActiveFolderTodoList();
   }
   function handleToggleComplete(event) {
     const todoIndex = todoList.findIndex((todo) => todo.id === event.detail.id);
@@ -64,7 +53,6 @@
       updatedTodo,
       ...todoList.slice(todoIndex + 1),
     ];
-    updateActiveFolderTodoList();
   }
 </script>
 

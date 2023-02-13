@@ -44,8 +44,7 @@
   {#if activeFolder}
     <Todo
       folderName={activeFolder.name}
-      todoList={activeFolder.todoList}
-      on:updateActiveFolderTodoList={handleUpdateActiveFolderTodoList}
+      bind:todoList={activeFolder.todoList}
     />
   {/if}
 </div>
